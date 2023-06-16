@@ -15,15 +15,20 @@ const PokemonCounter = (props) => {
   const handleCountPokemons = async (event) => {
     event.preventDefault();
     if(searchTerm){
-      const entiites = entiyCounter === 'pokemon' ? await getPokemonsByLetter(searchTerm) : await getPokemonLocations(searchTerm);
-      if(!entiites){
-        setResult(`No se han encontrado considencias con el texto ingresado`)
+      try{
+        const entiites = entiyCounter === 'pokemon' ? await getPokemonsByLetter(searchTerm) : await getPokemonLocations(searchTerm);
+        if(!entiites){
+          setResult(`No se han encontrado considencias con el texto ingresado`)
+        }
+        else{
+          entiyCounter === 'pokemon' ? 
+            setResult(`Hay ${entiites.quantity} pokemones que contienen "${searchTerm}" en su nombre`)
+            :
+            setResult(`Hay ${entiites.quantity} lugares en los que se puede encontrar ${searchTerm}`)
+        }
       }
-      else{
-        entiyCounter === 'pokemon' ? 
-          setResult(`Hay ${entiites.quantity} pokemones que contienen "${searchTerm}" en su nombre`)
-          :
-          setResult(`Hay ${entiites.quantity} lugares en los que se puede encontrar ${searchTerm}`)
+      catch (error) {
+        console.log("Error:", error);
       }
     }
   };
