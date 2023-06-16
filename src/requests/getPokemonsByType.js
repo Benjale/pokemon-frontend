@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function getPokemonsByTypes(type){
+async function getPokemonsByType(type){
   try {
     const response = await axios.get(`${process.env.REACT_APP_API_URL}/pokemons/types/${type}`);
     const data = response.data;
@@ -9,4 +9,4 @@ async function getPokemonsByTypes(type){
     console.log(error)
   }
 }
-export default getPokemonsByTypes;
+export default getPokemonsByType;
