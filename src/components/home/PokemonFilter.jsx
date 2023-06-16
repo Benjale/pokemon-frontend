@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Container, Dropdown, Row } from "react-bootstrap";
+import { Button, Col, Container, Dropdown, Row, Card } from "react-bootstrap";
 import getPokemonTypes from "../../requests/getPokemonTypes";
 import getPokemonsByType from "../../requests/getPokemonsByType";
 
@@ -79,11 +79,19 @@ const PokemonFilter = () => {
         <Row className="py-4 px-4"> 
           <Col xs={12}>
             <div className="text-center">
-              <hy className="mx-4"></hy>
+              <hr className="my-1" />
               {filteredPokemons.length > 0 ? (
-                filteredPokemons.map((pokemon) => (
-                  <p key={pokemon}>{pokemon}</p>
-                ))
+                <Row xs={1} md={2} xl={3} className="mt-3 g-4">
+                {filteredPokemons.map((pokemon) => (
+                  <Col key={pokemon}>
+                    <Card className="mb-3">
+                      <Card.Body>
+                        <Card.Title>{pokemon}</Card.Title>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+                </Row>
               ) : (
                 <p>No se encontraron Pokemones.</p>
               )}
